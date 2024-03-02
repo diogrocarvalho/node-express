@@ -4,6 +4,7 @@ import express from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
 import sessionsRouter from './routers/sessionsRouter'
+import adminRouter from './routers/adminRouter'
 
 dotenv.config()
 const app = express()
@@ -16,6 +17,7 @@ app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
 app.use('/sessions', sessionsRouter)
+app.use('/admin', adminRouter)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Globomantics' })
