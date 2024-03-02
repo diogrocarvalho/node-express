@@ -5,6 +5,14 @@ import { MongoClient } from 'mongodb'
 const sessionsRouter = express.Router()
 const appDebug = debug('app:sessionsRouter')
 
+sessionsRouter.use((req, res, next) => {
+  if (req.user) {
+    next()
+  } else {
+    res.redirect('/')
+  }
+})
+
 function getDbConnection() {
   const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@globomantics.gcs1plu.mongodb.net/?retryWrites=true&w=majority&appName=Globomantics`
   const client = new MongoClient(uri)
