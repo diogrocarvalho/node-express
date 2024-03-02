@@ -1,8 +1,9 @@
 import chalk from 'chalk'
-import express from 'express'
 import debug from 'debug'
+import express from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
+import sessionsRouter from './routers/sessionsRouter'
 
 dotenv.config()
 const app = express()
@@ -13,6 +14,8 @@ app.use(express.static(path.join(__dirname, '../public/')))
 
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
+
+app.use('/sessions', sessionsRouter)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Globomantics' })
